@@ -17,7 +17,7 @@ export type SelectorConfig<T> = {
 
 export class Selector<T> extends Stateful<T> {
     private readonly generate: SelectorGenerator<T>
-    private readonly set: SelectorSetter<T>
+    // private readonly set: SelectorSetter<T>
 
     // Keep track of all the registered dependencies. We want to make sure we only
     // re-render once when they change.
@@ -49,6 +49,6 @@ export class Selector<T> extends Stateful<T> {
         this.value = generate({ get: dep => this.addDep(dep) });
 
         this.generate = generate;
-        this.set = set
+        // this.set = set
     }
 }

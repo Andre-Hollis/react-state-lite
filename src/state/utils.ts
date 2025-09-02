@@ -5,7 +5,7 @@ import { Selector, type SelectorGenerator, type SelectorSetter } from './selecto
 // The `key` member is currently unused. I just kept it around to maintain a similar
 // API to Recoil.
 export function atom<V>(value: { key: string; default: V }): Atom<V> {
-    return new Atom(value.default);
+    return new Atom({key: value.key, default: value.default});
 }
 
 // A helper method for creating a new Selector
@@ -15,5 +15,5 @@ export function selector<V>(value: {
     get: SelectorGenerator<V>;
     set: SelectorSetter<V>;
 }): Selector<V> {
-    return new Selector({get: value.get, set: value.set});   
+    return new Selector({key: value.key, get: value.get, set: value.set});   
 }

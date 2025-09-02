@@ -12,11 +12,13 @@ export type SelectorSetter<T> = (
 ) => void;
 
 export type SelectorConfig<T> = {
+    key: string,
     get: SelectorGenerator<T>,
     set: SelectorSetter<T>
 }
 
 export class Selector<T> extends Stateful<T> {
+    key: string
     private readonly generate: SelectorGenerator<T>
     private readonly set: SelectorSetter<T>
 
@@ -49,6 +51,7 @@ export class Selector<T> extends Stateful<T> {
 
         this.value = config.get({ get: dep => this.addDep(dep) });
 
+        this.key = config.key;
         this.generate = config.get;
         this.set = config.set;
     }

@@ -14,6 +14,7 @@ export class Atom<T> extends Stateful<T> {
         super(undefined as any);
 
         this.key = config.key;
+        super.value = config.default
     }
 
     public setState(value: T) {

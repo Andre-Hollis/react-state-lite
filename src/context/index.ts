@@ -6,5 +6,5 @@ export interface Store {
     selectorSubscribers: Map<string, any>;
 }
 
-export const StateLiteContext = React.createContext<Map<string, any> | null>(null);
+export const StateLiteContext = React.createContext<Map<string, any> | null>(new Map());
 // export const StateLiteContext = React.createContext<Store | null>(null);

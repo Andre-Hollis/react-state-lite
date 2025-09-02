@@ -1,6 +1,5 @@
 import React from 'react';
 
-import type { Stateful } from '../state/stateful';
 import { StateLiteContext } from '../context';
 import type { Selector } from '../state/selector';
 import type { Atom } from '../state/atom';
@@ -9,7 +8,7 @@ import type { Atom } from '../state/atom';
 // It can be used with `Selector`s or `Atom`s.
 export function useLiteValue<T>(value: Atom<T> | Selector<T>): T {
     const store = React.useContext(StateLiteContext);
-
+    console.log(store);
     const [, updateState] = React.useState({});
 
     React.useEffect(() => {
@@ -18,5 +17,7 @@ export function useLiteValue<T>(value: Atom<T> | Selector<T>): T {
     }, [value]);
 
     store?.set(value.key, value);
-    return value.snapshot();
+    const val = value.snapshot();
+    console.log(val);
+    return val;
 }

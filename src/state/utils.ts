@@ -15,5 +15,5 @@ export function selector<V>(value: {
     get: SelectorGenerator<V>;
     set: SelectorSetter<V>;
 }): Selector<V> {
-    return new Selector({value.get, value.set});   
+    return new Selector({get: value.get, set: value.set});   
 }

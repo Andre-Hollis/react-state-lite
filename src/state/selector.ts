@@ -6,9 +6,10 @@ export type SelectorGenerator<T> = (context: { get: <V>(dep: Stateful<V>) => V }
 export type SelectorSetter<T> = (
     context: {
         get: <V>(dep: Stateful<V>) => V ,
-        set: <V>(dep: Stateful<V>, newVal: Stateful<V>) => void,
-    }
-) => T;
+        set: <V>(dep: Stateful<V>, newVal: V) => void,
+    },
+    newValue: T
+) => void;
 
 export type SelectorConfig<T> = {
     get: SelectorGenerator<T>,
@@ -17,7 +18,7 @@ export type SelectorConfig<T> = {
 
 export class Selector<T> extends Stateful<T> {
     private readonly generate: SelectorGenerator<T>
-    // private readonly set: SelectorSetter<T>
+    private readonly set: SelectorSetter<T>
 
     // Keep track of all the registered dependencies. We want to make sure we only
     // re-render once when they change.
@@ -41,14 +42,24 @@ export class Selector<T> extends Stateful<T> {
         this.update(this.generate({ get: dep => this.addDep(dep) }));
     }
 
-    constructor(generate: SelectorGenerator<T>) {
+    constructor(config: SelectorConfig<T>) {
         // This needs to be undefined initially because of Typescript's inheritance rules
         // It's effectively "initialised memory"
         super(undefined as any);
 
-        this.value = generate({ get: dep => this.addDep(dep) });
+        this.value = config.get({ get: dep => this.addDep(dep) });
 
-        this.generate = generate;
-        // this.set = set
+        this.generate = config.get;
+        this.set = config.set;
+    }
+
+    public setState(value: T) {
+        this.set({
+            get: dep => this.addDep(dep),
+            set: (dep, val) => {
+                this.addDep(dep);
+                dep.setState(val);
+            },
+        }, value);
     }
 }

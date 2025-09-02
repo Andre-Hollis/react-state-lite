@@ -43,4 +43,8 @@ export class Stateful<T> {
             },
         };
     }
+
+    public setState(value: T) {
+        
+    }
 }

@@ -40,6 +40,6 @@ export class Stateful<T> {
     }
 
     public setState(value: T) {
-        throw new Error("Method 'draw()' must be implemented by subclasses.");
+        throw new Error("Method 'setState()' must be implemented by subclasses.");
     }
 }

@@ -21,7 +21,7 @@ yarn add react-state-lite
 ```
 ---
 
-## 📦 Basic Concepts
+## 🧱 Basic Concepts
 
 - Atom: The smallest unit of state.
 - Selector (optional): Derived/computed state based on one or more atoms.
@@ -50,20 +50,34 @@ function Counter() {
 
 ---
 
-## 📦 API Reference
+## 📚 API Reference
 
 ```bash
 atom<T>(initialValue: T): Atom<T>
 ```
 Creates a new piece of reactive state.
 
-```bash
-useAtom<T>(atom: Atom<T>): [T, (value: T | ((prev: T) => T)) => void]
-```
-Hook to access and update the state of an atom.
-  ✅ Automatically subscribes the component to changes in the atom's value.
 
 ```bash
 selector<T>(get: () => T): Atom<T>
 ```
-(Optional) Create derived state from one or more atoms.
+Create derived state from one or more atoms/selectors.
+
+
+```bash
+useLiteState<T>(atom: Atom<T>): [T, (value: T | ((prev: T) => T)) => void]
+```
+Hook to access and update the state of an atom/selector.
+  ✅ Automatically subscribes the component to changes in the state's value.
+
+```bash
+useLiteValue<T>(atom: Atom<T>): T
+```
+Hook to access the state of an atom/selector.
+  ✅ Automatically subscribes the component to changes in the state's value.
+
+---
+
+## 🙌 Acknowledgements
+
+Inspired by great state libraries like Recoil and Jotai. Built with ❤️ to make state management simpler and more performant.

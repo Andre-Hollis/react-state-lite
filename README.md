@@ -65,13 +65,13 @@ Create derived state from one or more atoms/selectors.
 
 
 ```bash
-useLiteState<T>(atom: Atom<T>): [T, (value: T | ((prev: T) => T)) => void]
+useLiteState<T>(atom: Atom<T> | Selector<T>): [T, (value: T | ((prev: T) => T)) => void]
 ```
 Hook to access and update the state of an atom/selector.
   ✅ Automatically subscribes the component to changes in the state's value.
 
 ```bash
-useLiteValue<T>(atom: Atom<T>): T
+useLiteValue<T>(atom: Atom<T> | Selector<T>): T
 ```
 Hook to access the state of an atom/selector.
   ✅ Automatically subscribes the component to changes in the state's value.

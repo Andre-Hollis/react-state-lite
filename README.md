@@ -14,11 +14,8 @@
 
 ## 📦 Installation
 
-```bash
-npm install react-state-lite
-# or
-yarn add react-state-lite
-```
+# Comming soon.
+
 ---
 
 ## 🧱 Basic Concepts

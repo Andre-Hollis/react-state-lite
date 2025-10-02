@@ -14,7 +14,7 @@
 
 ## 📦 Installation
 
-# Comming soon.
+**Comming soon...**
 
 ---
 
